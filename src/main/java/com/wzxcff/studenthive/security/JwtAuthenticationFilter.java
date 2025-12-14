@@ -1,4 +1,4 @@
-package com.wzxcff.studenthive.config;
+package com.wzxcff.studenthive.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
 package com.wzxcff.studenthive.service;
 
-import com.wzxcff.studenthive.config.JwtUtil;
+import com.wzxcff.studenthive.security.JwtUtil;
 import com.wzxcff.studenthive.dto.request.AuthRequest;
 import com.wzxcff.studenthive.dto.request.RegisterRequest;
 import com.wzxcff.studenthive.dto.response.AuthResponse;

@@ -1,4 +1,4 @@
-package com.wzxcff.studenthive.config;
+package com.wzxcff.studenthive.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

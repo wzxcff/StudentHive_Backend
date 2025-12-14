@@ -1,4 +1,4 @@
-package com.wzxcff.studenthive.config;
+package com.wzxcff.studenthive.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;

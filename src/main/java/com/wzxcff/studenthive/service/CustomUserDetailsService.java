@@ -1,4 +1,4 @@
-package com.wzxcff.studenthive.config;
+package com.wzxcff.studenthive.service;
 
 import com.wzxcff.studenthive.repository.UserRepository;
 import lombok.NonNull;
