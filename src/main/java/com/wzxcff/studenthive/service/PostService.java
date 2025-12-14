@@ -1,7 +1,9 @@
 package com.wzxcff.studenthive.service;
 
+import com.wzxcff.studenthive.dto.request.PostRequest;
 import com.wzxcff.studenthive.dto.response.PostResponse;
 import com.wzxcff.studenthive.model.entity.Post;
+import com.wzxcff.studenthive.model.entity.User;
 import com.wzxcff.studenthive.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,5 +30,25 @@ public class PostService {
                 post.getCreatedAt(),
                 post.isPinned()
         ));
+    }
+
+    public PostResponse createPost(PostRequest postRequest, User author) {
+        Post post = Post.builder()
+                .title(postRequest.getTitle())
+                .content(postRequest.getContent())
+                .author(author)
+                .isPinned(false)
+                .build();
+
+        Post savedPost = postRepository.save(post);
+
+        return new PostResponse(
+                savedPost.getId(),
+                savedPost.getTitle(),
+                savedPost.getContent(),
+                savedPost.getAuthor().getUsername(),
+                savedPost.getCreatedAt(),
+                savedPost.isPinned()
+        );
     }
 }
