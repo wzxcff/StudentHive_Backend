@@ -46,7 +46,7 @@ public class PostService {
                 savedPost.getId(),
                 savedPost.getTitle(),
                 savedPost.getContent(),
-                savedPost.getAuthor().getUsername(),
+                savedPost.getAuthor().getRealUsername(),
                 savedPost.getCreatedAt(),
                 savedPost.isPinned()
         );
