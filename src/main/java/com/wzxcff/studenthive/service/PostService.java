@@ -17,12 +17,8 @@ import org.springframework.stereotype.Service;
 public class PostService {
     private final PostRepository postRepository;
 
-    public Page<PostResponse> getAllPosts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-
-        Page<Post> postsPage = postRepository.findAll(pageable);
-
-        return postsPage.map(post -> new PostResponse(
+    public Page<PostResponse> getAllPosts(Pageable pageable) {
+        return postRepository.findAll(pageable).map(post -> new PostResponse(
                 post.getId(),
                 post.getTitle(),
                 post.getContent(),
