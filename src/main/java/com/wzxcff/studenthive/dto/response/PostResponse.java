@@ -9,5 +9,6 @@ public record PostResponse (
     String content,
     String authorUsername,
     LocalDateTime createdAt,
+    LocalDateTime updatedAt,
     boolean isPinned
 ) {}

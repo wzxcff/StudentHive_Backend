@@ -7,9 +7,7 @@ import com.wzxcff.studenthive.model.entity.User;
 import com.wzxcff.studenthive.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +22,7 @@ public class PostService {
                 post.getContent(),
                 post.getAuthor().getUsername(),
                 post.getCreatedAt(),
+                post.getUpdatedAt(),
                 post.isPinned()
         ));
     }
@@ -44,7 +43,37 @@ public class PostService {
                 savedPost.getContent(),
                 savedPost.getAuthor().getRealUsername(),
                 savedPost.getCreatedAt(),
+                savedPost.getUpdatedAt(),
                 savedPost.isPinned()
+        );
+    }
+
+    public void deletePost(Long postId, User currentUser) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+
+        if (!post.getAuthor().getId().equals(currentUser.getId())) {
+            throw new RuntimeException("You are not allowed to delete this post");
+        }
+        postRepository.delete(post);
+    }
+
+    public PostResponse updatePost(Long postId, PostRequest postRequest, User author) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+
+        if (!post.getAuthor().getId().equals(author.getId())) {
+            throw new RuntimeException("You are not allowed to update this post");
+        }
+        post.setTitle(postRequest.getTitle());
+        post.setContent(postRequest.getContent());
+        Post updatedPost = postRepository.save(post);
+        return new PostResponse(
+                updatedPost.getId(),
+                updatedPost.getTitle(),
+                updatedPost.getContent(),
+                updatedPost.getAuthor().getRealUsername(),
+                updatedPost.getCreatedAt(),
+                updatedPost.getUpdatedAt(),
+                updatedPost.isPinned()
         );
     }
 }

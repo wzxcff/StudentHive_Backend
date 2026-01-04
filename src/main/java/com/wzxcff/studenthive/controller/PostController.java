@@ -33,4 +33,20 @@ public class PostController {
         PostResponse postResponse = postService.createPost(postRequest, currentUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
     }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long postId, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+
+        postService.deletePost(postId, currentUser);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<PostResponse> updatePost(@PathVariable Long postId, @RequestBody PostRequest postRequest, Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+
+        PostResponse postResponse = postService.updatePost(postId, postRequest, currentUser);
+        return ResponseEntity.ok(postResponse);
+    }
 }
