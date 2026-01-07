@@ -25,6 +25,11 @@ public class PostController {
         return ResponseEntity.ok(postService.getAllPosts(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
+        return ResponseEntity.ok(postService.getPostById(id));
+    }
+
     @PostMapping
     public ResponseEntity<PostResponse> createPost(@RequestBody PostRequest postRequest, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();

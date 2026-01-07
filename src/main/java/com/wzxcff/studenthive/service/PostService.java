@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -25,6 +27,19 @@ public class PostService {
                 post.getUpdatedAt(),
                 post.isPinned()
         ));
+    }
+
+    public PostResponse getPostById(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        return new PostResponse(
+                post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getAuthor().getUsername(),
+                post.getCreatedAt(),
+                post.getUpdatedAt(),
+                post.isPinned()
+        );
     }
 
     public PostResponse createPost(PostRequest postRequest, User author) {
