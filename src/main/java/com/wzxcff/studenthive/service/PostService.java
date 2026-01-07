@@ -22,7 +22,7 @@ public class PostService {
                 post.getId(),
                 post.getTitle(),
                 post.getContent(),
-                post.getAuthor().getUsername(),
+                post.getAuthor().getRealUsername(),
                 post.getCreatedAt(),
                 post.getUpdatedAt(),
                 post.isPinned()
@@ -35,7 +35,7 @@ public class PostService {
                 post.getId(),
                 post.getTitle(),
                 post.getContent(),
-                post.getAuthor().getUsername(),
+                post.getAuthor().getRealUsername(),
                 post.getCreatedAt(),
                 post.getUpdatedAt(),
                 post.isPinned()
